@@ -80,6 +80,25 @@ function renderProducts(filter="") {
       </div>
     </article>`).join("");
   labAction("product_list_rendered", {query:q,item_count:data.length});
+
+  window.dataLayer = window.dataLayer || [];
+
+  window.dataLayer.push({
+    event: "view_item_list",
+    ecommerce: {
+      item_list_id: "home_products",
+      item_list_name: "Homepage Products",
+      items: data.map((p, i) => ({
+        item_id: p.id,
+        item_name: p.name,
+        item_brand: p.brand,
+        item_category: p.category,
+        item_variant: p.variant,
+        price: p.price,
+        index: i + 1
+      }))
+    }
+  });
 }
 
 function initProduct() {
